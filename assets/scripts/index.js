@@ -67,6 +67,7 @@ $(document).ready(() => {
 
   // hides all page elements that need to appear at specific points.
   hidePageElements();
+// This is great, makes things easy to read -jw
 
   // make sure the appropriate page elements are displayed
   // based on whether or not you're logged in
@@ -96,6 +97,7 @@ $(document).ready(() => {
       console.log('you should be seeing a lot of climbs now...');
       $('.content-body').empty();
       let climbListingTemplate = require('./handlebars/climbs/climbs-listing.handlebars');
+      // great modularizing of your handlebars
       $('.content-body').append(climbListingTemplate({
         climbs
       }));
@@ -131,6 +133,8 @@ $(document).ready(() => {
       $('.inputClimbColor').last().val(color);
       let gymId = $('.new-climbs-button')[0].dataset.gymId;
       $('.inputClimbGym').last().val(gymId);
+      //wow, I understand why you did this but this is a doozy of a function.
+      // Once we get into front-end frameworks a lot of this will be cleaned up
     }
   });
 
@@ -209,6 +213,8 @@ $(document).ready(() => {
     color = $(this)[0].dataset.colorId;
     $('.edit-climb-square-preview').removeClass (function (index, css) {
        return (css.match (/(^|\s)bk-\S+/g) || []).join(' ');
+       //what does this regex do?
+       // You didn't write this did you? Not bad if you didn't just curious
     });
     $('.edit-climb-square-preview').addClass('bk-'+color);
     $('.editInputClimbColor').val(color);
@@ -238,6 +244,9 @@ $(document).ready(() => {
     $('.edit-climb-square-preview').append(document.createTextNode(type+grade+modifier));
     $('.editInputClimbModifier').val(modifier);
   });
+
+  // most of your code is driven by clicks. I'm excited for when we learn
+  //front-end frameworks. It will simpilfy alot of your code
 
   // vvvv open edit climb menu vvvv
   $('.content-body').on('click', 'button.edit-climb-button', function(event) {
@@ -343,6 +352,7 @@ $(document).ready(() => {
      data: JSON.stringify(favoriteData)
    }).done(function (data) {
      console.log(data);
+     // in final production code remove console logs
      displayMessage('.climb-favorited');
    }).fail(function (jqxhr) {
      console.error(jqxhr);
@@ -385,6 +395,8 @@ $(document).ready(() => {
   //   //   });
   //   // }
   // };
+
+//also in production code remove throw away comments
 
  // vvv show newsfeed vvv
  let showNewsfeed = function showNewsfeed(event) {
@@ -433,6 +445,7 @@ $(document).ready(() => {
      data: formData,
    }).done(function (user) {
      localStorage.setItem('User', JSON.stringify(user));
+     // looks like you commented out localstorage, did you end up using this?
      myApp.user = user;
      toggleLoggedIn();
      hideModal();
@@ -442,6 +455,7 @@ $(document).ready(() => {
      showNewsfeed(event);
    }).fail(function (jqxhr) {
      $('.wrong-password').show();
+     //nice touch
      console.error(jqxhr);
    });
  };
@@ -590,6 +604,7 @@ $(document).ready(() => {
         users
         // this is passing the JSON object into the bookListingTemplate
         // where handlebars will deal with each item of the array individually
+        // can't get over how good your commenting is
       }));
       myApp.users = users;
 
@@ -718,6 +733,8 @@ $(document).ready(() => {
       // this looks at the class and determines if it includes the string 'visit-gym'
       // and returns a string parsed as a url path for either gyms or users.
       // this doesn't account for any edge cases and will likely need to be improved.
+      // don't worry about this for now, there are better ways when we get into
+      //front-end frameworks.
       let destination = event.target.dataset.linkId;
       // this looks up the data element of the button, which is the target user/gym's id
       let path;
